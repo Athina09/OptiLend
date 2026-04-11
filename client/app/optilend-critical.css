@@ -1,0 +1,202 @@
+/**
+ * MSME login scoped fallback styles (.msme-login-fallback …).
+ * Imported from globals.css so PostCSS/Webpack resolve it (root /url() imports break the bundle).
+ */
+.msme-login-fallback {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #0f172a;
+  background: linear-gradient(to bottom, #f1f5f9, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  box-sizing: border-box;
+}
+.msme-login-fallback *,
+.msme-login-fallback *::before,
+.msme-login-fallback *::after {
+  box-sizing: border-box;
+}
+
+.msme-login-fallback .ol-wrap {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.msme-login-fallback .ol-login-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 1rem;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+}
+
+.msme-login-fallback .ol-input-shell {
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.75rem !important;
+  background: #f8fafc !important;
+}
+
+.msme-login-fallback input[type='text'],
+.msme-login-fallback input[type='password'],
+.msme-login-fallback input[type='url'] {
+  width: 100%;
+  max-width: 100%;
+  border: none !important;
+  background: transparent !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  outline: none !important;
+  color: #0f172a !important;
+}
+.msme-login-fallback input::placeholder {
+  color: #64748b !important;
+}
+.msme-login-fallback input:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+}
+
+.msme-login-fallback label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.msme-login-fallback button[data-ol='primary'] {
+  display: flex !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.8rem 1.25rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  border: none !important;
+  background: #0d9488 !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.35) !important;
+}
+.msme-login-fallback button[data-ol='primary']:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+.msme-login-fallback button[data-ol='secondary'] {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.65rem 1.1rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  border: 1px solid #5eead4 !important;
+  background: #f0fdfa !important;
+  color: #115e59 !important;
+  cursor: pointer !important;
+  min-width: 7.5rem;
+}
+.msme-login-fallback button[data-ol='secondary']:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+.msme-login-fallback button[data-ol='outline'] {
+  display: flex !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 0.75rem !important;
+  padding: 0.7rem 1rem !important;
+  border: 2px solid #0d9488 !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+  color: #0f766e !important;
+  cursor: pointer !important;
+}
+.msme-login-fallback button[data-ol='outline']:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+.msme-login-fallback button[data-ol='social'] {
+  width: 3rem !important;
+  height: 3rem !important;
+  min-width: 3rem !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.75rem !important;
+  background: #ffffff !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.msme-login-fallback button[data-ol='teal-sm'] {
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+  background: #0d9488 !important;
+  color: #fff !important;
+  cursor: pointer !important;
+}
+.msme-login-fallback button[data-ol='teal-sm']:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+.msme-login-fallback a {
+  color: #0d9488 !important;
+  font-weight: 500;
+}
+.msme-login-fallback a:hover {
+  text-decoration: underline;
+}
+
+.msme-login-fallback .ol-hint {
+  font-size: 0.8rem;
+  color: #b45309;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.msme-login-fallback .ol-demo {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+}
+.msme-login-fallback button[data-ol='link'] {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  color: #0d9488 !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  font-size: inherit !important;
+  box-shadow: none !important;
+}
+
+.msme-login-fallback .ol-step3 {
+  border: 1px solid rgba(45, 212, 191, 0.5);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(to bottom right, #f0fdfa, #ffffff);
+  margin-top: 0.5rem;
+}
+
+.msme-login-fallback input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #0d9488;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "optilend-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && node index.js",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "install:all": "npm run install:client && npm run install:server"
+  }
+}
