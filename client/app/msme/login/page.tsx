@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { MSME_AA_CONSENT_KEY } from '@/lib/msme-consent';
 
 const API_URL = process.env.NEXT_PUBLIC_SOCIAL_API_URL || 'http://localhost:4000';
 const DEMO_OTP = '123456';
@@ -266,6 +267,8 @@ export default function MSMELoginPage() {
     if (!businessVerified || !agreeToShare || !sessionToken || !verification) return;
     setLoginLoading(true);
     try {
+      /* Fresh login must show AA + GST consent; old msme_aa_consent_v1 would skip the page otherwise. */
+      localStorage.removeItem(MSME_AA_CONSENT_KEY);
       localStorage.setItem(MSME_BUSINESS_TOKEN_KEY, sessionToken);
       localStorage.setItem(
         MSME_BUSINESS_PROFILE_KEY,
@@ -275,7 +278,7 @@ export default function MSMELoginPage() {
           verifiedAt: Date.now(),
         })
       );
-      window.location.href = '/msme/assessment';
+      window.location.href = '/msme/account-aggregator-consent';
     } finally {
       setLoginLoading(false);
     }
@@ -566,6 +569,16 @@ export default function MSMELoginPage() {
                 I agree to share my details with Optilend and partner lenders for credit assessment and related services.
               </span>
             </label>
+
+            <p className="rounded-xl border border-teal-100 bg-teal-50/50 px-3 py-2 text-xs leading-relaxed text-teal-900">
+              <strong className="font-semibold">Next step:</strong> after Secure Login you will complete the{' '}
+              <strong>Account Aggregator &amp; GST consent</strong> form (bank data via AA + GST filings) before the
+              MSME assessment. Direct link:{' '}
+              <Link href="/msme/account-aggregator-consent" className="underline font-medium">
+                /msme/account-aggregator-consent
+              </Link>
+              .
+            </p>
 
             <Button
               type="submit"

@@ -4,7 +4,12 @@ import { useEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import { Button } from '@/components/ui/Button';
 
-export function HeroSection() {
+type HeroSectionProps = {
+  /** e.g. lg:text-left when paired with side-by-side phone */
+  className?: string;
+};
+
+export function HeroSection({ className = '' }: HeroSectionProps) {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -67,7 +72,7 @@ export function HeroSection() {
   const words = headline.split(' ');
 
   return (
-    <section className="text-center">
+    <section className={`text-center ${className}`}>
       <h1
         ref={headlineRef}
         className="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-slate-900"
@@ -100,7 +105,7 @@ export function HeroSection() {
       </p>
       <div
         ref={buttonsRef}
-        className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
       >
         <Button href="/msme/login" variant="primary" className="min-w-[200px]">
           Login as MSME

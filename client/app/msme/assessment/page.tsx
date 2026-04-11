@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { gsap } from '@/lib/gsap';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
+import { MSME_BUSINESS_TOKEN_KEY, hasAAConsent } from '@/lib/msme-consent';
 
 const ASSESSMENT_QUESTIONS = [
   {
@@ -46,6 +47,17 @@ export default function MSMEAssessmentPage() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!mounted || typeof window === 'undefined') return;
+    if (!localStorage.getItem(MSME_BUSINESS_TOKEN_KEY)) {
+      router.replace('/msme/login');
+      return;
+    }
+    if (!hasAAConsent()) {
+      router.replace('/msme/account-aggregator-consent');
+    }
+  }, [mounted, router]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !cardRef.current || !mounted) return;

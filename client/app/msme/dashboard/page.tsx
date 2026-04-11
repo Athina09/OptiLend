@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { gsap } from '@/lib/gsap';
+import { hasAAConsent, MSME_BUSINESS_TOKEN_KEY, parseAAConsent } from '@/lib/msme-consent';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { OptilendScoreMeter } from '@/components/dashboard/OptilendScoreMeter';
 import { AnimatedCounter } from '@/components/dashboard/AnimatedCounter';
@@ -253,6 +256,7 @@ const WHATIF_PIE_DATA = [
 const MSME_BUSINESS_PROFILE_KEY = 'msme_business_profile';
 
 export default function MSMEDashboardPage() {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [verifiedMSME, setVerifiedMSME] = useState(false);
@@ -261,6 +265,7 @@ export default function MSMEDashboardPage() {
   const [whatIfQuestion, setWhatIfQuestion] = useState('');
   const [whatIfAnswer, setWhatIfAnswer] = useState<string | null>(null);
   const [whatIfLoading, setWhatIfLoading] = useState(false);
+  const [consentSummary, setConsentSummary] = useState<ReturnType<typeof parseAAConsent>>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -274,6 +279,19 @@ export default function MSMEDashboardPage() {
       setVerifiedMSME(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (!mounted || typeof window === 'undefined') return;
+    if (!localStorage.getItem(MSME_BUSINESS_TOKEN_KEY)) {
+      router.replace('/msme/login');
+      return;
+    }
+    if (!hasAAConsent()) {
+      router.replace('/msme/account-aggregator-consent');
+      return;
+    }
+    setConsentSummary(parseAAConsent());
+  }, [mounted, router]);
 
   const fetchStoredProfilesFromBackend = async () => {
     const requestUrl = `${SOCIAL_API_URL}/social/profiles`;
@@ -388,6 +406,32 @@ export default function MSMEDashboardPage() {
           </h1>
           <div className="accent-bar h-1 w-20 rounded-full bg-cyan-500" />
         </div>
+
+        {consentSummary && (
+          <GlassCard
+            variant="strong"
+            className="mb-8 border-teal-200/80 bg-gradient-to-r from-teal-50/80 to-white p-5 sm:p-6"
+          >
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-teal-800">
+                  Account Aggregator &amp; GST consent
+                </h2>
+                <p className="mt-1 text-sm text-slate-700">
+                  On file from <strong className="font-medium text-slate-900">{consentSummary.signerName}</strong> —{' '}
+                  {new Date(consentSummary.acceptedAt).toLocaleDateString()}. Bank data (via AA) + GST filings
+                  authorised for this demo session.
+                </p>
+              </div>
+              <Link
+                href="/msme/account-aggregator-consent?review=1"
+                className="shrink-0 rounded-xl border-2 border-teal-500/40 bg-white px-4 py-2.5 text-center text-sm font-semibold text-teal-800 shadow-sm transition hover:border-teal-500 hover:bg-teal-50"
+              >
+                View consent
+              </Link>
+            </div>
+          </GlassCard>
+        )}
 
         {/* Bento: OptilendScore large + GST */}
         <div className="grid gap-6 lg:grid-cols-3 mb-8">
