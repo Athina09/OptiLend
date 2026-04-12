@@ -1,0 +1,93 @@
+{
+  "auto_parts": {
+    "business_type": "Auto Parts Manufacturing",
+    "reference_credit_score": 800,
+    "loan_recommendations": [
+      {
+        "loan_type": "Working Capital Loan",
+        "fit": "High",
+        "max_amount": 1500000,
+        "interest_rate": "10–12%",
+        "reason": "Strong cash flow and consistent GST filings support working capital needs"
+      },
+      {
+        "loan_type": "Term Loan (Machinery)",
+        "fit": "High",
+        "max_amount": 3000000,
+        "interest_rate": "9–11%",
+        "reason": "Stable business with expansion potential and good repayment capacity"
+      },
+      {
+        "loan_type": "Invoice Financing",
+        "fit": "High",
+        "max_amount": 1000000,
+        "interest_rate": "8–10%",
+        "reason": "Regular B2B transactions and receivables cycle"
+      },
+      {
+        "loan_type": "MUDRA Loan",
+        "fit": "Low",
+        "reason": "Business exceeds micro category eligibility"
+      }
+    ]
+  },
+  "tailoring": {
+    "business_type": "Tailoring Unit",
+    "reference_credit_score": 640,
+    "loan_recommendations": [
+      {
+        "loan_type": "Working Capital Loan",
+        "fit": "Medium",
+        "max_amount": 400000,
+        "interest_rate": "12–15%",
+        "reason": "Moderate cash flow but inconsistent financial records"
+      },
+      {
+        "loan_type": "MUDRA Loan",
+        "fit": "High",
+        "max_amount": 500000,
+        "interest_rate": "10–12%",
+        "reason": "Falls under micro/small business category"
+      },
+      {
+        "loan_type": "Stand-Up India",
+        "fit": "Medium",
+        "max_amount": 1000000,
+        "reason": "Eligible if criteria met, but needs better compliance"
+      },
+      {
+        "loan_type": "Invoice Financing",
+        "fit": "Low",
+        "reason": "Limited formal invoicing and B2B exposure"
+      }
+    ]
+  },
+  "tech_startup": {
+    "business_type": "Tech Startup",
+    "reference_credit_score": 600,
+    "loan_recommendations": [
+      {
+        "loan_type": "Working Capital Loan",
+        "fit": "Low",
+        "reason": "Negative cash flow and early-stage instability"
+      },
+      {
+        "loan_type": "MUDRA Loan",
+        "fit": "Medium",
+        "max_amount": 300000,
+        "reason": "Eligible but lacks financial track record"
+      },
+      {
+        "loan_type": "Stand-Up India",
+        "fit": "Medium",
+        "max_amount": 1000000,
+        "reason": "Startup eligible under certain conditions"
+      },
+      {
+        "loan_type": "Term Loan",
+        "fit": "Low",
+        "reason": "No asset-backed expansion or stable revenue"
+      }
+    ]
+  }
+}

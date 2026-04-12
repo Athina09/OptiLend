@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
+import './optilend-critical.css';
 import { PageTransitionWrapper } from '@/components/PageTransitionWrapper';
 import { ClientLayout } from '@/components/ClientLayout';
 

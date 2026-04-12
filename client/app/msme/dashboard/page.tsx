@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { gsap } from '@/lib/gsap';
@@ -24,6 +24,11 @@ import {
   postScore,
   type ScoreExplanation,
 } from '@/lib/scoring-api';
+import {
+  loanSchemesForSegment,
+  SEGMENT_LOAN_DATASETS,
+  type DashboardLoanScheme,
+} from '@loan-recommendation-layer';
 
 const SOCIAL_API_URL = process.env.NEXT_PUBLIC_SOCIAL_API_URL || 'http://localhost:4000';
 const MSME_SOCIAL_STORAGE_KEY = 'msme_social_data';
@@ -37,23 +42,7 @@ type StoredSocialEntry = {
   timestamp?: string;
 };
 
-type LoanScheme = {
-  id: string;
-  name: string;
-  type: string;
-  scheme: string;
-  shortDesc: string;
-  fit: 'High' | 'Medium' | 'Low';
-  color: 'teal' | 'cyan' | 'amber';
-  details: {
-    eligibility: string[];
-    interestRate: string;
-    tenure: string;
-    maxAmount: string;
-    documents: string[];
-    description: string;
-  };
-};
+type LoanScheme = DashboardLoanScheme;
 
 const LOAN_SCHEMES: LoanScheme[] = [
   {
@@ -403,6 +392,20 @@ export default function MSMEDashboardPage() {
   const titleBlockRef = useRef<HTMLDivElement>(null);
   const chartBarsRef = useRef<HTMLDivElement>(null);
   const recListRef = useRef<HTMLUListElement>(null);
+
+  const loanIndustrySegment: AssessmentProfileId | null =
+    scoreExplanation?.scoring_segment ?? verifiedAssessmentProfileId;
+
+  const schemesToShow = useMemo(() => {
+    if (
+      loanIndustrySegment === 'auto_parts' ||
+      loanIndustrySegment === 'tailoring' ||
+      loanIndustrySegment === 'tech_startup'
+    ) {
+      return loanSchemesForSegment(loanIndustrySegment, optilendMeterScore);
+    }
+    return LOAN_SCHEMES;
+  }, [loanIndustrySegment, optilendMeterScore]);
 
   const handleWhatIfSubmit = async () => {
     const q = whatIfQuestion.trim();
@@ -976,11 +979,19 @@ export default function MSMEDashboardPage() {
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
             <span className="h-0.5 w-8 rounded bg-teal-500" />
-            Loans & Schemes for You
+            {loanIndustrySegment
+              ? `Loans matched to ${SEGMENT_LOAN_DATASETS[loanIndustrySegment].business_type}`
+              : 'Loans & Schemes for You'}
           </h2>
+          {loanIndustrySegment ? (
+            <p className="mb-3 text-sm text-slate-600">
+              Industry-tuned fit scores (demo dataset). OptilendScore drives the scoring layer; loan rows follow the
+              judge scenario for this segment.
+            </p>
+          ) : null}
           <GlassCard data-dashboard-card className="p-6 hover:border-teal-500/50 transition-all duration-300 hover:shadow-lg">
             <ul ref={recListRef} className="space-y-3">
-              {LOAN_SCHEMES.map((scheme) => (
+              {schemesToShow.map((scheme) => (
                 <li
                   key={scheme.id}
                   className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 hover:border-teal-500/50 hover:bg-slate-100 transition-all duration-300"
