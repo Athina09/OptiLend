@@ -1,0 +1,7 @@
+{
+  "name": "codher-security",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AES-256-CBC helpers for sensitive payloads (Node.js crypto)",
+  "main": "utils/encryption.js"
+}
