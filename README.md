@@ -1,72 +1,82 @@
-# Optilend
+# Optilend (codHER monorepo)
 
-AI-Powered Alternative Credit Intelligence for MSMEs. Premium fintech frontend built with Next.js (App Router), GSAP, and Three.js.
+AI-powered alternative credit intelligence demo for MSMEs: **Next.js frontend**, **Express scoring API**, **segment loan recommendations**, and optional **encryption helpers**.
 
-## Features
+## Packages
 
-- **Landing page**: Hero with 3D Three.js background (floating data nodes), GSAP headline/subtext/button animations, security badges (AES-256, RBI-Aligned, DPDP Compliant)
-- **MSME Login**: Aadhaar/Business ID + OTP, glassmorphism card, animated focus
-- **Bank Login**: Email, password, 2FA, institutional-style UI
-- **MSME Dashboard**: OptilendScore circular meter (300–900), GST/UPI/Utility scores, cash flow chart, bank recommendations, animated counters
-- **Bank Dashboard**: MSME list with filters (risk band, industry, turnover), detailed MSME view with SHAP explanation, cash flow trends, credit insights
-- **UI**: Dark theme, electric blue + emerald accents, glassmorphism, loading screen with 3D-style logo, scroll-triggered animations
+| Folder | Role | Docs |
+|--------|------|------|
+| **`client/`** | Next.js 14 (App Router), MSME/bank flows, OptilendScore UI | Run `npm run dev` inside `client/` |
+| **`scoring-layer/`** | Standalone scoring API: rules + nearest peer in `dataset.json` | [scoring-layer/README.md](./scoring-layer/README.md) |
+| **`loan-recommendation-layer/`** | Segment loan datasets + mapping to dashboard card shape | [loan-recommendation-layer/README.md](./loan-recommendation-layer/README.md) |
+| **`security/`** | AES-256-CBC helpers (`ENCRYPTION_KEY`) for backends | [security/README.md](./security/README.md) |
+| **`server/`** | Optilend Express server (e.g. email routes) | `cd server && npm start` |
+| **`Chatbot/`**, **`test/`** | Other services (if used) | See each folder |
 
-## Tech Stack
+## Quick start (full demo)
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- GSAP (animations, ScrollTrigger)
-- Three.js (@react-three/fiber, @react-three/drei)
+1. **Install**
 
-## Getting Started
+   ```bash
+   npm run install:all
+   ```
 
-```bash
-npm install
-npm run dev
-```
+   (Installs `client`, `server`, and `scoring-layer` dependencies.)
 
-Open [http://localhost:3000](http://localhost:3000).
+2. **Scoring API** (default port **5055**)
 
-## Routes
+   ```bash
+   npm run scoring-layer
+   ```
+
+3. **Next client** (from repo root)
+
+   ```bash
+   npm run client
+   ```
+
+4. **Env (client)** — optional but recommended so the browser can reach the scorer:
+
+   In `client/.env.local`:
+
+   ```env
+   SCORING_API_URL=http://127.0.0.1:5055
+   NEXT_PUBLIC_SCORING_LAYER_URL=http://127.0.0.1:5055
+   ```
+
+   - **`SCORING_API_URL`** — used by **`client/app/api/score/route.ts`** to proxy `POST /api/score` → `{SCORING_API_URL}/score`.
+   - **`NEXT_PUBLIC_SCORING_LAYER_URL`** — optional direct calls from the browser (`lib/scoring-api.ts`).
+
+## Features (high level)
+
+- **Landing**: Hero, 3D background, GSAP, security badges  
+- **MSME**: Login, AA consent, assessment, **dashboard with live OptilendScore** from scoring layer  
+- **Bank**: Login, portfolio, MSME detail  
+- **Scoring**: Explainable **300–900** score (legacy demo + rich assessment); see [scoring-layer/README.md](./scoring-layer/README.md)  
+- **Loans**: Industry-segment recommendations when `scoring_segment` / profile matches; see [loan-recommendation-layer/README.md](./loan-recommendation-layer/README.md)
+
+## Client routes
 
 | Route | Description |
 |-------|-------------|
-| `/` | Landing (hero, 3D background, login buttons) |
+| `/` | Landing |
 | `/msme/login` | MSME login |
-| `/msme/dashboard` | MSME dashboard (after login) |
-| `/bank/login` | Bank / lender login |
-| `/bank/dashboard` | Bank portfolio (MSME list, filters) |
-| `/bank/msme/[id]` | MSME detail (OptilendScore, SHAP, cash flow, insights) |
+| `/msme/dashboard` | Dashboard (score meter, scoring panel, loans) |
+| `/bank/login` | Bank login |
+| `/bank/dashboard` | Portfolio |
+| `/bank/msme/[id]` | MSME detail |
 
-## Project Structure
+## Tech stack
 
-```
-app/
-  page.tsx              # Landing
-  layout.tsx
-  globals.css
-  msme/login/
-  msme/dashboard/
-  bank/login/
-  bank/dashboard/
-  bank/msme/[id]/
-components/
-  landing/              # HeroSection, FeaturesSection
-  dashboard/            # OptilendScoreMeter, AnimatedCounter
-  ui/                    # GlassCard, Button, Input
-  Scene3D.tsx            # Three.js background
-  LoadingScreen.tsx
-  SecurityBadges.tsx
-  PageTransitionWrapper.tsx
-  ClientLayout.tsx
-lib/
-  gsap.ts
-```
+- Next.js 14, TypeScript, Tailwind, GSAP, Three.js  
+- Express (scoring layer + server)
 
-## Build
+## Build (client only)
 
 ```bash
-npm run build
-npm start
+cd client && npm run build && npm start
 ```
+
+## Disclaimer
+
+Demo / hackathon use. Not production credit or legal advice.
