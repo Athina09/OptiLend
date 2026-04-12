@@ -1,0 +1,1146 @@
+[
+  {
+    "monthly_sales": [
+      82414,
+      69489,
+      89250,
+      75509,
+      62490,
+      86670
+    ],
+    "monthly_expenses": [
+      76078,
+      66229,
+      83411,
+      73999,
+      59652,
+      82649
+    ],
+    "digital_txn_ratio": 0.557,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 337
+  },
+  {
+    "monthly_sales": [
+      344103,
+      343354,
+      385769,
+      309339,
+      335401,
+      411473
+    ],
+    "monthly_expenses": [
+      210755,
+      218056,
+      258250,
+      203331,
+      207088,
+      258344
+    ],
+    "digital_txn_ratio": 0.517,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 732
+  },
+  {
+    "monthly_sales": [
+      212311,
+      223485,
+      218391,
+      235144,
+      227343,
+      228131
+    ],
+    "monthly_expenses": [
+      166872,
+      179058,
+      176560,
+      192253,
+      191976,
+      179368
+    ],
+    "digital_txn_ratio": 0.977,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 681
+  },
+  {
+    "monthly_sales": [
+      92988,
+      89732,
+      97518,
+      90779,
+      96311,
+      89286
+    ],
+    "monthly_expenses": [
+      56674,
+      55396,
+      58264,
+      56999,
+      61777,
+      53094
+    ],
+    "digital_txn_ratio": 0.637,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 645
+  },
+  {
+    "monthly_sales": [
+      358951,
+      390605,
+      387124,
+      350031,
+      331076,
+      363744
+    ],
+    "monthly_expenses": [
+      281052,
+      306031,
+      316083,
+      275888,
+      261031,
+      273916
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 737
+  },
+  {
+    "monthly_sales": [
+      190190,
+      260322,
+      213969,
+      186692,
+      229647,
+      217504
+    ],
+    "monthly_expenses": [
+      115347,
+      156093,
+      129559,
+      111730,
+      134443,
+      139517
+    ],
+    "digital_txn_ratio": 0.357,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 668
+  },
+  {
+    "monthly_sales": [
+      113308,
+      118698,
+      126084,
+      113575,
+      112637,
+      84964
+    ],
+    "monthly_expenses": [
+      88378,
+      90893,
+      93872,
+      86177,
+      91510,
+      67958
+    ],
+    "digital_txn_ratio": 0.817,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 573
+  },
+  {
+    "monthly_sales": [
+      378717,
+      407999,
+      391821,
+      381172,
+      412375,
+      362495
+    ],
+    "monthly_expenses": [
+      228550,
+      237409,
+      240397,
+      216908,
+      251314,
+      220485
+    ],
+    "digital_txn_ratio": 0.777,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 765
+  },
+  {
+    "monthly_sales": [
+      220586,
+      279946,
+      235311,
+      225774,
+      233365,
+      279961
+    ],
+    "monthly_expenses": [
+      171393,
+      209406,
+      177084,
+      164668,
+      176524,
+      214630
+    ],
+    "digital_txn_ratio": 0.437,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 657
+  },
+  {
+    "monthly_sales": [
+      123211,
+      96551,
+      132916,
+      128218,
+      115274,
+      129975
+    ],
+    "monthly_expenses": [
+      105560,
+      79211,
+      106043,
+      102048,
+      93335,
+      108047
+    ],
+    "digital_txn_ratio": 0.897,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 617
+  },
+  {
+    "monthly_sales": [
+      367401,
+      326337,
+      410881,
+      396882,
+      444449,
+      439218
+    ],
+    "monthly_expenses": [
+      284365,
+      238321,
+      312510,
+      277790,
+      311305,
+      322139
+    ],
+    "digital_txn_ratio": 0.157,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 689
+  },
+  {
+    "monthly_sales": [
+      337162,
+      216363,
+      221955,
+      216226,
+      340610,
+      278741
+    ],
+    "monthly_expenses": [
+      234343,
+      156643,
+      161395,
+      166013,
+      257155,
+      200524
+    ],
+    "digital_txn_ratio": 0.616,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 664
+  },
+  {
+    "monthly_sales": [
+      133385,
+      124816,
+      138708,
+      138698,
+      125063,
+      129725
+    ],
+    "monthly_expenses": [
+      92168,
+      88939,
+      95517,
+      104095,
+      90599,
+      90838
+    ],
+    "digital_txn_ratio": 0.576,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 426
+  },
+  {
+    "monthly_sales": [
+      390296,
+      394807,
+      417694,
+      421968,
+      417589,
+      397443
+    ],
+    "monthly_expenses": [
+      200805,
+      208733,
+      232919,
+      236642,
+      217742,
+      202153
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 585
+  },
+  {
+    "monthly_sales": [
+      326929,
+      269024,
+      245392,
+      253388,
+      310204,
+      250535
+    ],
+    "monthly_expenses": [
+      224926,
+      186926,
+      170952,
+      182717,
+      207349,
+      167115
+    ],
+    "digital_txn_ratio": 0.696,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 697
+  },
+  {
+    "monthly_sales": [
+      151218,
+      142733,
+      168132,
+      176045,
+      112489,
+      116774
+    ],
+    "monthly_expenses": [
+      77348,
+      72932,
+      81656,
+      93548,
+      61354,
+      64860
+    ],
+    "digital_txn_ratio": 0.456,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 610
+  },
+  {
+    "monthly_sales": [
+      365649,
+      442022,
+      426975,
+      465104,
+      380379,
+      553150
+    ],
+    "monthly_expenses": [
+      250469,
+      299294,
+      300880,
+      321703,
+      263384,
+      394855
+    ],
+    "digital_txn_ratio": 0.416,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 706
+  },
+  {
+    "monthly_sales": [
+      317540,
+      301222,
+      273323,
+      284248,
+      297992,
+      315277
+    ],
+    "monthly_expenses": [
+      161469,
+      148574,
+      134938,
+      142684,
+      145845,
+      164646
+    ],
+    "digital_txn_ratio": 0.876,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 768
+  },
+  {
+    "monthly_sales": [
+      161495,
+      168260,
+      173192,
+      135868,
+      174584,
+      170451
+    ],
+    "monthly_expenses": [
+      141890,
+      144026,
+      143630,
+      116692,
+      145433,
+      149524
+    ],
+    "digital_txn_ratio": 0.836,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 628
+  },
+  {
+    "monthly_sales": [
+      391872,
+      493509,
+      436087,
+      483648,
+      369912,
+      466328
+    ],
+    "monthly_expenses": [
+      335248,
+      407396,
+      371427,
+      397827,
+      319391,
+      391261
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 716
+  },
+  {
+    "monthly_sales": [
+      366806,
+      363802,
+      247278,
+      294764,
+      285409,
+      309116
+    ],
+    "monthly_expenses": [
+      249063,
+      233431,
+      158442,
+      186540,
+      188491,
+      200129
+    ],
+    "digital_txn_ratio": 0.256,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 689
+  },
+  {
+    "monthly_sales": [
+      173139,
+      181408,
+      178208,
+      164557,
+      175052,
+      170262
+    ],
+    "monthly_expenses": [
+      147602,
+      146537,
+      153216,
+      130516,
+      141341,
+      137201
+    ],
+    "digital_txn_ratio": 0.716,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 641
+  },
+  {
+    "monthly_sales": [
+      424684,
+      406356,
+      450057,
+      488580,
+      496565,
+      433432
+    ],
+    "monthly_expenses": [
+      348457,
+      312250,
+      357020,
+      365424,
+      371889,
+      328855
+    ],
+    "digital_txn_ratio": 0.676,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 717
+  },
+  {
+    "monthly_sales": [
+      357856,
+      277346,
+      278008,
+      321823,
+      284248,
+      284582
+    ],
+    "monthly_expenses": [
+      275373,
+      219117,
+      219012,
+      271529,
+      236330,
+      219873
+    ],
+    "digital_txn_ratio": 0.636,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 683
+  },
+  {
+    "monthly_sales": [
+      186096,
+      158662,
+      206319,
+      161679,
+      179099,
+      148324
+    ],
+    "monthly_expenses": [
+      110357,
+      96178,
+      135511,
+      105740,
+      112549,
+      98045
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 641
+  },
+  {
+    "monthly_sales": [
+      41556,
+      43838,
+      48486,
+      61998,
+      55985,
+      62600
+    ],
+    "monthly_expenses": [
+      31853,
+      33857,
+      38586,
+      50485,
+      43412,
+      51295
+    ],
+    "digital_txn_ratio": 0.056,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 533
+  },
+  {
+    "monthly_sales": [
+      350848,
+      326526,
+      314228,
+      339914,
+      357098,
+      350083
+    ],
+    "monthly_expenses": [
+      207005,
+      192146,
+      183772,
+      212309,
+      204410,
+      219787
+    ],
+    "digital_txn_ratio": 0.516,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 535
+  },
+  {
+    "monthly_sales": [
+      198617,
+      194738,
+      211305,
+      189308,
+      185274,
+      209140
+    ],
+    "monthly_expenses": [
+      178847,
+      173616,
+      198796,
+      174510,
+      173484,
+      193069
+    ],
+    "digital_txn_ratio": 0.476,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 614
+  },
+  {
+    "monthly_sales": [
+      56362,
+      64340,
+      62249,
+      76207,
+      64309,
+      66451
+    ],
+    "monthly_expenses": [
+      33085,
+      36720,
+      36905,
+      45357,
+      38355,
+      39513
+    ],
+    "digital_txn_ratio": 0.936,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 646
+  },
+  {
+    "monthly_sales": [
+      393712,
+      355523,
+      273324,
+      376302,
+      385446,
+      338622
+    ],
+    "monthly_expenses": [
+      299425,
+      261970,
+      200042,
+      284285,
+      286547,
+      254986
+    ],
+    "digital_txn_ratio": 0.896,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 728
+  },
+  {
+    "monthly_sales": [
+      205696,
+      228034,
+      236736,
+      197274,
+      273280,
+      191534
+    ],
+    "monthly_expenses": [
+      120130,
+      126102,
+      142255,
+      111610,
+      147685,
+      107529
+    ],
+    "digital_txn_ratio": 0.656,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 695
+  },
+  {
+    "monthly_sales": [
+      73631,
+      81858,
+      77122,
+      73213,
+      75849,
+      75107
+    ],
+    "monthly_expenses": [
+      55777,
+      58867,
+      57064,
+      53157,
+      58208,
+      54063
+    ],
+    "digital_txn_ratio": 0.316,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 550
+  },
+  {
+    "monthly_sales": [
+      387915,
+      390359,
+      413856,
+      388711,
+      364707,
+      320686
+    ],
+    "monthly_expenses": [
+      225387,
+      208945,
+      218902,
+      208483,
+      205846,
+      169388
+    ],
+    "digital_txn_ratio": 0.776,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 770
+  },
+  {
+    "monthly_sales": [
+      219294,
+      258143,
+      241873,
+      223356,
+      252224,
+      268054
+    ],
+    "monthly_expenses": [
+      189903,
+      209832,
+      207865,
+      180491,
+      207546,
+      213922
+    ],
+    "digital_txn_ratio": 0.736,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 664
+  },
+  {
+    "monthly_sales": [
+      72790,
+      112139,
+      84592,
+      76660,
+      72052,
+      108405
+    ],
+    "monthly_expenses": [
+      36251,
+      58036,
+      45423,
+      38861,
+      36632,
+      62333
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 655
+  },
+  {
+    "monthly_sales": [
+      423614,
+      487473,
+      481955,
+      451313,
+      331931,
+      425294
+    ],
+    "monthly_expenses": [
+      284468,
+      333271,
+      325792,
+      301125,
+      244106,
+      311911
+    ],
+    "digital_txn_ratio": 0.456,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 713
+  },
+  {
+    "monthly_sales": [
+      235929,
+      221776,
+      248485,
+      243720,
+      245427,
+      247085
+    ],
+    "monthly_expenses": [
+      184572,
+      174559,
+      206811,
+      205895,
+      201178,
+      204856
+    ],
+    "digital_txn_ratio": 0.616,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 664
+  },
+  {
+    "monthly_sales": [
+      91573,
+      95661,
+      100116,
+      98109,
+      117768,
+      106451
+    ],
+    "monthly_expenses": [
+      61219,
+      63705,
+      68480,
+      70423,
+      80013,
+      74537
+    ],
+    "digital_txn_ratio": 0.576,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 411
+  },
+  {
+    "monthly_sales": [
+      419230,
+      346522,
+      461414,
+      457553,
+      325057,
+      368302
+    ],
+    "monthly_expenses": [
+      206274,
+      167050,
+      218261,
+      241631,
+      154861,
+      187317
+    ],
+    "digital_txn_ratio": 0.536,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 546
+  },
+  {
+    "monthly_sales": [
+      233679,
+      229211,
+      268557,
+      270328,
+      236153,
+      221375
+    ],
+    "monthly_expenses": [
+      155521,
+      148577,
+      185853,
+      186090,
+      166113,
+      147656
+    ],
+    "digital_txn_ratio": 0.996,
+    "gst_filed": true,
+    "loan_defaults": 1,
+    "precomputed_score": 499
+  },
+  {
+    "monthly_sales": [
+      128341,
+      119490,
+      117747,
+      118483,
+      122943,
+      115813
+    ],
+    "monthly_expenses": [
+      107682,
+      97306,
+      97855,
+      100554,
+      104552,
+      95591
+    ],
+    "digital_txn_ratio": 0.256,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 545
+  },
+  {
+    "monthly_sales": [
+      418458,
+      400866,
+      442711,
+      450766,
+      439633,
+      450870
+    ],
+    "monthly_expenses": [
+      277243,
+      252739,
+      274514,
+      297040,
+      284622,
+      285758
+    ],
+    "digital_txn_ratio": 0.716,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 753
+  },
+  {
+    "monthly_sales": [
+      252165,
+      272395,
+      276023,
+      287264,
+      237878,
+      303968
+    ],
+    "monthly_expenses": [
+      210819,
+      216994,
+      231608,
+      235344,
+      188972,
+      240801
+    ],
+    "digital_txn_ratio": 0.376,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 656
+  },
+  {
+    "monthly_sales": [
+      161732,
+      140969,
+      118693,
+      128323,
+      129174,
+      150307
+    ],
+    "monthly_expenses": [
+      106668,
+      86379,
+      74552,
+      80786,
+      86728,
+      90273
+    ],
+    "digital_txn_ratio": 0.836,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 659
+  },
+  {
+    "monthly_sales": [
+      443300,
+      458593,
+      504447,
+      323318,
+      455485,
+      450250
+    ],
+    "monthly_expenses": [
+      404040,
+      393146,
+      426521,
+      280718,
+      408482,
+      413054
+    ],
+    "digital_txn_ratio": 0.796,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 692
+  },
+  {
+    "monthly_sales": [
+      274784,
+      294919,
+      285959,
+      295816,
+      302062,
+      285330
+    ],
+    "monthly_expenses": [
+      242958,
+      242618,
+      247004,
+      244868,
+      254652,
+      249671
+    ],
+    "digital_txn_ratio": 0.556,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 675
+  },
+  {
+    "monthly_sales": [
+      164912,
+      161470,
+      137677,
+      148010,
+      137528,
+      145475
+    ],
+    "monthly_expenses": [
+      123691,
+      122904,
+      106721,
+      112551,
+      104852,
+      117222
+    ],
+    "digital_txn_ratio": 0.516,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 623
+  },
+  {
+    "monthly_sales": [
+      444714,
+      495364,
+      486801,
+      380924,
+      425383,
+      399199
+    ],
+    "monthly_expenses": [
+      255062,
+      285970,
+      274638,
+      217400,
+      271992,
+      245182
+    ],
+    "digital_txn_ratio": 0.976,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 770
+  },
+  {
+    "monthly_sales": [
+      260816,
+      363851,
+      298503,
+      346874,
+      327126,
+      251157
+    ],
+    "monthly_expenses": [
+      194841,
+      270497,
+      233783,
+      253568,
+      257253,
+      194039
+    ],
+    "digital_txn_ratio": 0.636,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 688
+  },
+  {
+    "monthly_sales": [
+      198589,
+      121687,
+      131496,
+      167481,
+      206797,
+      120377
+    ],
+    "monthly_expenses": [
+      113304,
+      68091,
+      75242,
+      104056,
+      120646,
+      69937
+    ],
+    "digital_txn_ratio": 1,
+    "gst_filed": false,
+    "loan_defaults": 0,
+    "precomputed_score": 625
+  },
+  {
+    "monthly_sales": [
+      450835,
+      419318,
+      471990,
+      428007,
+      427498,
+      479933
+    ],
+    "monthly_expenses": [
+      335442,
+      304298,
+      373446,
+      334527,
+      312246,
+      354853
+    ],
+    "digital_txn_ratio": 0.356,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 706
+  },
+  {
+    "monthly_sales": [
+      286059,
+      286865,
+      309996,
+      350116,
+      312230,
+      338297
+    ],
+    "monthly_expenses": [
+      162352,
+      155433,
+      179870,
+      207228,
+      189649,
+      185312
+    ],
+    "digital_txn_ratio": 0.816,
+    "gst_filed": true,
+    "loan_defaults": 0,
+    "precomputed_score": 751
+  }
+]

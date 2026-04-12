@@ -10,6 +10,20 @@ import { OptilendScoreMeter } from '@/components/dashboard/OptilendScoreMeter';
 import { AnimatedCounter } from '@/components/dashboard/AnimatedCounter';
 import { AppHeader } from '@/components/AppHeader';
 import { Chatbot } from '@/components/msme/Chatbot';
+import { AssessmentProfileSummary } from '@/components/msme/AssessmentProfileSummary';
+import { ScoringLayerPanel } from '@/components/msme/ScoringLayerPanel';
+import {
+  assessmentAnswersToPayload,
+  classifyAssessmentProfile,
+  MSME_VERIFICATION_ASSESSMENT_KEY,
+  type AssessmentProfileId,
+} from '@/lib/msme-assessment-bridge';
+import {
+  DEFAULT_SCORING_DEMO_PAYLOAD,
+  postAssessmentScore,
+  postScore,
+  type ScoreExplanation,
+} from '@/lib/scoring-api';
 
 const SOCIAL_API_URL = process.env.NEXT_PUBLIC_SOCIAL_API_URL || 'http://localhost:4000';
 const MSME_SOCIAL_STORAGE_KEY = 'msme_social_data';
@@ -266,9 +280,56 @@ export default function MSMEDashboardPage() {
   const [whatIfAnswer, setWhatIfAnswer] = useState<string | null>(null);
   const [whatIfLoading, setWhatIfLoading] = useState(false);
   const [consentSummary, setConsentSummary] = useState<ReturnType<typeof parseAAConsent>>(null);
+  const [optilendMeterScore, setOptilendMeterScore] = useState<number | null>(null);
+  const [scoreExplanation, setScoreExplanation] = useState<ScoreExplanation | null>(null);
+  const [scoreLayerError, setScoreLayerError] = useState<string | null>(null);
+  /** Q1 classification from last verification assessment submit (for summary card) */
+  const [verifiedAssessmentProfileId, setVerifiedAssessmentProfileId] = useState<AssessmentProfileId | null>(null);
+  /** Shown under the meter when a new scoring run changes the credit score vs the prior value */
+  const [creditScoreTransition, setCreditScoreTransition] = useState<{ from: number; to: number } | null>(
+    null
+  );
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      let assessmentPayload = null;
+      let profileFromForm: AssessmentProfileId | null = null;
+      try {
+        if (typeof window !== 'undefined') {
+          const raw = localStorage.getItem(MSME_VERIFICATION_ASSESSMENT_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw) as { answers?: Record<string, string> };
+            if (parsed?.answers && typeof parsed.answers === 'object') {
+              profileFromForm = classifyAssessmentProfile(parsed.answers);
+              assessmentPayload = assessmentAnswersToPayload(parsed.answers);
+            }
+          }
+        }
+      } catch {
+        assessmentPayload = null;
+      }
+      setVerifiedAssessmentProfileId(profileFromForm);
+
+      const r = assessmentPayload
+        ? await postAssessmentScore(assessmentPayload)
+        : await postScore(DEFAULT_SCORING_DEMO_PAYLOAD);
+      if (cancelled) return;
+      if (r.ok) {
+        setOptilendMeterScore(r.score);
+        setScoreExplanation(r.explanation);
+        setScoreLayerError(null);
+      } else {
+        setScoreLayerError(r.error);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -348,7 +409,9 @@ export default function MSMEDashboardPage() {
     if (!q || whatIfLoading) return;
     setWhatIfLoading(true);
     setWhatIfAnswer(null);
-    const context = 'Context: MSME dashboard — OptilendScore 720, GST compliance 87%, UPI transactions 1247 (30d), Utility reliability 92%, Cash flow trend +12% MoM (last 7 months).';
+    const scoreLabel =
+      optilendMeterScore != null ? String(optilendMeterScore) : 'not yet loaded from scoring layer';
+    const context = `Context: MSME dashboard — OptilendScore ${scoreLabel}, GST compliance 87%, UPI transactions 1247 (30d), Utility reliability 92%, Cash flow trend +12% MoM (last 7 months).`;
     const message = `${context} What-if question: ${q}`;
     try {
       const res = await fetch(`${CHAT_API_URL}/chat`, {
@@ -360,7 +423,7 @@ export default function MSMEDashboardPage() {
       setWhatIfAnswer(data.reply || 'No response. Try rephrasing your question.');
     } catch {
       setWhatIfAnswer(
-        'Based on your dashboard (OptilendScore 720, GST 87%, cash flow +12%): Your profile is strong. ' +
+        `Based on your dashboard (OptilendScore ${scoreLabel}, GST 87%, cash flow +12%): Your profile is strong. ` +
         'For questions about turnover, loans, or compliance, consider speaking with your relationship manager or using the Optilend chatbot for detailed analysis.'
       );
     } finally {
@@ -433,7 +496,16 @@ export default function MSMEDashboardPage() {
           </GlassCard>
         )}
 
-        {/* Bento: OptilendScore large + GST */}
+        <AssessmentProfileSummary
+          explanation={scoreExplanation}
+          liveScore={optilendMeterScore}
+          fallbackProfileId={verifiedAssessmentProfileId}
+        />
+
+        <div className="mb-3 mt-2">
+          <h2 className="font-display text-lg font-bold text-slate-900">Credit overview</h2>
+          <p className="mt-0.5 text-sm text-slate-500">OptilendScore and snapshot compliance metrics</p>
+        </div>
         <div className="grid gap-6 lg:grid-cols-3 mb-8">
           <GlassCard
             data-dashboard-card
@@ -441,8 +513,67 @@ export default function MSMEDashboardPage() {
             glow="cyan"
             className="p-8 lg:col-span-2 flex flex-col items-center justify-center min-h-[300px] hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10"
           >
-            <OptilendScoreMeter score={720} />
-            <p className="mt-4 text-cyan-600 text-sm font-medium">OptilendScore (300–900)</p>
+            <OptilendScoreMeter key={optilendMeterScore ?? 'loading'} score={optilendMeterScore} />
+            <p className="mt-4 text-cyan-600 text-sm font-medium text-center max-w-md">
+              OptilendScore (300–900)
+              {scoreExplanation ? (
+                <span className="block mt-1 text-xs font-normal text-slate-500">
+                  {scoreExplanation.mode === 'assessment' ? (
+                    <>
+                      <strong className="font-medium text-slate-600">Industry assessment</strong> — five weighted
+                      pillars (bank, GST, UPI, profile, growth) plus a small nearest-peer nudge from{' '}
+                      <code className="rounded bg-slate-100 px-1 text-[10px]">dataset.json</code>. Use the panel below
+                      to re-run or compare presets.
+                    </>
+                  ) : (
+                    <>
+                      Live credit score from the scoring layer (60% rules, 40% nearest peer). Adjust inputs below
+                      and click <strong className="font-medium text-slate-600">Run scoring</strong> — the dial
+                      animates from the old value to the new one.
+                    </>
+                  )}
+                </span>
+              ) : scoreLayerError ? (
+                <span className="block mt-1 text-xs font-normal text-amber-700">
+                  <strong className="font-semibold text-amber-900">Scoring engine not connected.</strong> If the dial
+                  still shows an old number like 720, hard-refresh after updating code. To fix: run{' '}
+                  <code className="rounded bg-amber-100/80 px-1">npm start</code> in{' '}
+                  <code className="rounded bg-amber-100/80 px-1">scoring-layer</code>, then add{' '}
+                  <code className="rounded bg-amber-100/80 px-1">
+                    NEXT_PUBLIC_SCORING_LAYER_URL=http://127.0.0.1:5055
+                  </code>{' '}
+                  to <code className="rounded bg-amber-100/80 px-1">client/.env.local</code> and restart{' '}
+                  <code className="rounded bg-amber-100/80 px-1">npm run dev</code> (browser calls the API directly,
+                  which fixes Docker / server-only localhost issues). Server proxy:{' '}
+                  <code className="rounded bg-amber-100/80 px-1">SCORING_API_URL</code>. — {scoreLayerError}
+                </span>
+              ) : (
+                <span className="block mt-1 text-xs font-normal text-slate-500">
+                  Fetching live score from the scoring layer…
+                </span>
+              )}
+            </p>
+            {creditScoreTransition && scoreExplanation ? (
+              <p
+                className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-slate-800 tabular-nums"
+                aria-live="polite"
+              >
+                <span className="text-slate-500 font-normal">Credit score update</span>
+                <span className="font-semibold">{creditScoreTransition.from}</span>
+                <span className="text-slate-400">→</span>
+                <span className="font-semibold">{creditScoreTransition.to}</span>
+                <span
+                  className={
+                    creditScoreTransition.to >= creditScoreTransition.from
+                      ? 'font-semibold text-teal-600'
+                      : 'font-semibold text-amber-700'
+                  }
+                >
+                  ({creditScoreTransition.to >= creditScoreTransition.from ? '+' : ''}
+                  {creditScoreTransition.to - creditScoreTransition.from} pts)
+                </span>
+              </p>
+            ) : null}
           </GlassCard>
           <GlassCard
             data-dashboard-card
@@ -478,6 +609,29 @@ export default function MSMEDashboardPage() {
               </div>
             </div>
           </GlassCard>
+        </div>
+
+        <div className="mb-3">
+          <h2 className="font-display text-lg font-bold text-slate-900">Scoring tools &amp; breakdown</h2>
+          <p className="mt-0.5 text-sm text-slate-500">Industry presets, slider demo, formulas, pillars, and peer match</p>
+        </div>
+        <div className="mb-8">
+          <ScoringLayerPanel
+            explanation={scoreExplanation}
+            liveScore={optilendMeterScore}
+            initialError={scoreLayerError}
+            onClearInitialError={() => setScoreLayerError(null)}
+            onScored={(score, explanation, meta) => {
+              if (meta != null) {
+                setCreditScoreTransition(
+                  meta.previousScore !== score ? { from: meta.previousScore, to: score } : null
+                );
+              }
+              setOptilendMeterScore(score);
+              setScoreExplanation(explanation);
+              setScoreLayerError(null);
+            }}
+          />
         </div>
 
         {/* Stats row */}

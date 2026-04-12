@@ -7,6 +7,16 @@ import { gsap } from '@/lib/gsap';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { MSME_BUSINESS_TOKEN_KEY, hasAAConsent } from '@/lib/msme-consent';
+import {
+  MSME_VERIFICATION_ASSESSMENT_KEY,
+  type StoredVerificationAssessment,
+} from '@/lib/msme-assessment-bridge';
+
+const SAMPLE_Q1_BY_PROFILE: { label: string; text: string }[] = [
+  { label: 'Auto parts', text: 'Manufacturing of auto parts' },
+  { label: 'Tailoring', text: 'Tailoring and garment production' },
+  { label: 'Tech startup', text: 'Tech startup (SaaS)' },
+];
 
 const ASSESSMENT_QUESTIONS = [
   {
@@ -80,6 +90,17 @@ export default function MSMEAssessmentPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!allAnswered) return;
+    if (typeof window !== 'undefined') {
+      try {
+        const payload: StoredVerificationAssessment = {
+          answers: { ...answers },
+          submittedAt: Date.now(),
+        };
+        localStorage.setItem(MSME_VERIFICATION_ASSESSMENT_KEY, JSON.stringify(payload));
+      } catch {
+        /* ignore quota / private mode */
+      }
+    }
     router.push('/msme/dashboard');
   };
 
@@ -98,6 +119,27 @@ export default function MSMEAssessmentPage() {
             <p className="mt-1 text-sm text-slate-600">
               Please answer the following. Type your answers (paste is disabled to verify authenticity).
             </p>
+            <p className="mt-2 text-xs text-slate-500 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2">
+              <strong className="text-slate-700">Credit score on the dashboard:</strong> question 1 is matched to an
+              industry model (e.g. include <em>tech startup</em>, <em>SaaS</em>, <em>tailoring</em>, or{' '}
+              <em>auto parts</em>) so your OptilendScore reflects that profile. Generic phrases may keep the default
+              demo score until you use the scoring panel presets.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="w-full text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+                Judge quick-fill (question 1)
+              </span>
+              {SAMPLE_Q1_BY_PROFILE.map((s) => (
+                <button
+                  key={s.label}
+                  type="button"
+                  onClick={() => handleChange('q1', s.text)}
+                  className="rounded-lg border border-cyan-200 bg-cyan-50/80 px-3 py-1.5 text-xs font-medium text-cyan-900 hover:bg-cyan-100 transition-colors"
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

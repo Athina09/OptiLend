@@ -1,0 +1,15 @@
+{
+  "name": "optilend-scoring-layer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Data-centric MSME credit scoring API (similarity + feature engineering, no ML libs)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "start:5051": "PORT=5051 node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

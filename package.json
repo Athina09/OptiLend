@@ -5,8 +5,10 @@
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "cd server && node index.js",
+    "scoring-layer": "cd scoring-layer && npm start",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
-    "install:all": "npm run install:client && npm run install:server"
+    "install:scoring-layer": "cd scoring-layer && npm install",
+    "install:all": "npm run install:client && npm run install:server && npm run install:scoring-layer"
   }
 }
