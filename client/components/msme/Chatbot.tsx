@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { localAssistantReply } from '@/lib/chat-assistant-local';
 
 const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:5001';
 
@@ -18,7 +19,10 @@ function formatBotMessage(text: string) {
 export function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: "Hello! I'm Optilend AI — your MSME financial assistant. Ask about credit, cash flow, or recommendations." },
+    {
+      role: 'bot',
+      text: "Hello! I'm Optilend AI — your MSME financial assistant. Ask **one question** at a time (credit, cash flow, loans, GST). If the chat server is off, you still get an **automated demo reply** here.",
+    },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -40,10 +44,20 @@ export function Chatbot() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: msg }),
       });
-      const data = await res.json();
-      setMessages(m => [...m, { role: 'bot', text: data.reply || 'No response.' }]);
+      let data: { reply?: string } = {};
+      try {
+        data = (await res.json()) as { reply?: string };
+      } catch {
+        data = {};
+      }
+      if (res.ok && typeof data.reply === 'string' && data.reply.trim()) {
+        const reply = data.reply.trim();
+        setMessages(m => [...m, { role: 'bot', text: reply }]);
+      } else {
+        setMessages(m => [...m, { role: 'bot', text: localAssistantReply(msg) }]);
+      }
     } catch {
-      setMessages(m => [...m, { role: 'bot', text: `Unable to connect to the assistant. Start the chat server: in the chatbot folder run "node server.js" (should listen on ${CHAT_API_URL}).` }]);
+      setMessages(m => [...m, { role: 'bot', text: localAssistantReply(msg) }]);
     } finally {
       setLoading(false);
     }
@@ -61,7 +75,7 @@ export function Chatbot() {
             </div>
             <div>
               <p className="font-semibold text-slate-900">Optilend AI</p>
-              <p className="text-xs text-slate-600">MSME financial assistant</p>
+              <p className="text-xs text-slate-600">One question, one answer — works offline</p>
             </div>
             <button
               type="button"
