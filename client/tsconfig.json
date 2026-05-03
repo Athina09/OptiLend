@@ -14,9 +14,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./*"],
-      "@loan-recommendation-layer": ["../loan-recommendation-layer/src/index.ts"],
-      "@loan-recommendation-layer/*": ["../loan-recommendation-layer/src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -28,7 +28,7 @@ import {
   loanSchemesForSegment,
   SEGMENT_LOAN_DATASETS,
   type DashboardLoanScheme,
-} from '@loan-recommendation-layer';
+} from '@/lib/loan-recommendation';
 
 const SOCIAL_API_URL = process.env.NEXT_PUBLIC_SOCIAL_API_URL || 'http://localhost:4000';
 const MSME_SOCIAL_STORAGE_KEY = 'msme_social_data';
@@ -237,7 +237,7 @@ function formatFetchedPlatformData(
   return out;
 }
 
-const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:5000';
+const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:5001';
 
 /** Bar chart: current vs projected (shown with what-if answer). Based on dashboard metrics. */
 const WHATIF_BAR_METRICS = [

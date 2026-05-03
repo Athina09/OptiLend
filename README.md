@@ -8,7 +8,7 @@ AI-powered alternative credit intelligence demo for MSMEs: **Next.js frontend**,
 |--------|------|------|
 | **`client/`** | Next.js 14 (App Router), MSME/bank flows, OptilendScore UI | Run `npm run dev` inside `client/` |
 | **`scoring-layer/`** | Standalone scoring API: rules + nearest peer in `dataset.json` | [scoring-layer/README.md](./scoring-layer/README.md) |
-| **`loan-recommendation-layer/`** | Segment loan datasets + mapping to dashboard card shape | [loan-recommendation-layer/README.md](./loan-recommendation-layer/README.md) |
+| **`client/lib/loan-recommendation/`** | Segment loan datasets + mapping to dashboard loan cards (bundled with the Next app) | Imported as `@/lib/loan-recommendation` |
 | **`security/`** | AES-256-CBC helpers (`ENCRYPTION_KEY`) for backends | [security/README.md](./security/README.md) |
 | **`server/`** | Optilend Express server (e.g. email routes) | `cd server && npm start` |
 | **`Chatbot/`**, **`test/`** | Other services (if used) | See each folder |
@@ -53,7 +53,7 @@ AI-powered alternative credit intelligence demo for MSMEs: **Next.js frontend**,
 - **MSME**: Login, AA consent, assessment, **dashboard with live OptilendScore** from scoring layer  
 - **Bank**: Login, portfolio, MSME detail  
 - **Scoring**: Explainable **300–900** score (legacy demo + rich assessment); see [scoring-layer/README.md](./scoring-layer/README.md)  
-- **Loans**: Industry-segment recommendations when `scoring_segment` / profile matches; see [loan-recommendation-layer/README.md](./loan-recommendation-layer/README.md)
+- **Loans**: Industry-segment recommendations when `scoring_segment` / profile matches; see `client/lib/loan-recommendation/`
 
 ## Client routes
 

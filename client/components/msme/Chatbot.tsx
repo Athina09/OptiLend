@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:5000';
+const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:5001';
 
 type Message = { role: 'user' | 'bot'; text: string };
 
@@ -43,7 +43,7 @@ export function Chatbot() {
       const data = await res.json();
       setMessages(m => [...m, { role: 'bot', text: data.reply || 'No response.' }]);
     } catch {
-      setMessages(m => [...m, { role: 'bot', text: `Unable to connect to the assistant. Start the chat server: in the Pranatheesh folder run "node server.js" (should listen on ${CHAT_API_URL}).` }]);
+      setMessages(m => [...m, { role: 'bot', text: `Unable to connect to the assistant. Start the chat server: in the chatbot folder run "node server.js" (should listen on ${CHAT_API_URL}).` }]);
     } finally {
       setLoading(false);
     }
