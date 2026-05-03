@@ -1,4 +1,4 @@
-# Optilend (codHER monorepo)
+# Optilend 
 
 AI-powered alternative credit intelligence demo for MSMEs: **Next.js frontend**, **Express scoring API**, **segment loan recommendations**, and optional **encryption helpers**.
 
