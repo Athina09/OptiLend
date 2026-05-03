@@ -1,4 +1,5 @@
 import type { AssessmentPayload, AssessmentSegmentId } from './assessment-presets';
+import { tryOfflineScoreResponse } from './local-scoring-fallback';
 
 export type ScoreFeatures = {
   averageRevenue: number;
@@ -69,6 +70,8 @@ export type ScoreExplanation = {
   features?: ScoreFeatures;
   blend?: ScoreBlendInfo;
   inputEcho?: ScoreInputEcho;
+  /** True when score was computed in the browser (scoring service unreachable). */
+  offlineEstimate?: boolean;
 };
 
 export type ScoringPayload = {
@@ -204,6 +207,7 @@ function parseExplanation(expl: Record<string, unknown>): ScoreExplanation | nul
     scoring_segment,
     creditTier,
     ruleScore,
+    offlineEstimate: expl.offlineEstimate === true,
     dataScore: Number(expl.dataScore),
     assessmentRuleScore: Number.isFinite(ars) ? ars : undefined,
     corpusRuleScore: Number.isFinite(corpusRule) ? corpusRule : undefined,
@@ -305,6 +309,15 @@ async function postScoreJson(
         e instanceof Error
           ? `${e.message}${url.startsWith('http') ? '' : ' (is the scoring layer running on port 5055?)'}`
           : String(e);
+    }
+  }
+
+  const offline = tryOfflineScoreResponse(body);
+  if (offline) {
+    const score = normalizeScore(offline.score);
+    const explanation = parseExplanation(offline.explanation);
+    if (score !== null && explanation) {
+      return { ok: true, score, explanation };
     }
   }
 

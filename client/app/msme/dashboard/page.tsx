@@ -521,7 +521,16 @@ export default function MSMEDashboardPage() {
               OptilendScore (300–900)
               {scoreExplanation ? (
                 <span className="block mt-1 text-xs font-normal text-slate-500">
-                  {scoreExplanation.mode === 'assessment' ? (
+                  {scoreExplanation.offlineEstimate ? (
+                    <span className="block text-cyan-800">
+                      <strong className="font-medium text-cyan-900">On-device estimate</strong> —{' '}
+                      {scoreExplanation.mode === 'assessment'
+                        ? 'Five weighted pillars (bank, GST, UPI, profile, growth) using the same math as the API; peer blend uses a fixed corpus-average score.'
+                        : 'Rule leg from your cash-flow inputs (same as the API); the 40% “data” leg uses a fixed corpus-average instead of a live nearest neighbour.'}{' '}
+                      Start <code className="rounded bg-cyan-100/80 px-1">scoring-layer</code> for full dataset
+                      matching.
+                    </span>
+                  ) : scoreExplanation.mode === 'assessment' ? (
                     <>
                       <strong className="font-medium text-slate-600">Industry assessment</strong> — five weighted
                       pillars (bank, GST, UPI, profile, growth) plus a small nearest-peer nudge from{' '}
