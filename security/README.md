@@ -50,31 +50,37 @@ const {
 
 Same plaintext → two different ciphertexts (different IVs).
 
-**Step 1 — set a one-off key:**
+**Important:** Run these commands from the **`codHER/security`** directory. `./utils/encryption` is relative to your shell’s current folder. If you run `node -e` from **`CodHER`** (the workspace root only), Node looks for `CodHER/utils/encryption.js`, which does not exist → **`Cannot find module './utils/encryption'`**.
+
+**Copy-paste (all three lines — includes `cd`):**
 
 ```bash
-cd /path/to/codHER/security
+cd /Users/apple/CodHER/codHER/security
 export ENCRYPTION_KEY="$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")"
-```
-
-**Step 2 — encrypt twice:**
-
-```bash
 node -e "
 const { encrypt } = require('./utils/encryption');
-console.log(encrypt('hello'));
-console.log(encrypt('hello'));
+for (let i = 1; i <= 2; i++) {
+  const { encryptedData, iv } = encrypt('hello');
+  console.log('Run', i);
+  console.log('  iv (hex):            ', iv);
+  console.log('  encryptedData (hex):', encryptedData);
+  console.log('');
+}
 "
 ```
 
-**One-liner** (key only for that process):
+(Adjust the `cd` path if your repo lives somewhere other than `/Users/apple/CodHER`.)
+
+**One-liner** (key only for that process) — prints **IV + ciphertext hex**, then decrypted plaintext:
 
 ```bash
-cd /path/to/codHER/security
+cd ~/CodHER/codHER/security
 ENCRYPTION_KEY="$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")" node -e "
 const { encrypt, decrypt } = require('./utils/encryption');
 const a = encrypt('hello');
-console.log(decrypt(a.encryptedData, a.iv));
+console.log('iv (hex):            ', a.iv);
+console.log('encryptedData (hex):', a.encryptedData);
+console.log('decrypted (utf8):   ', decrypt(a.encryptedData, a.iv));
 "
 ```
 

@@ -7,7 +7,7 @@ import { LandingNav } from '@/components/landing/LandingNav';
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <LandingNav />
       <HeroBackdrop />
       <div className="relative z-20 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-24 lg:py-28">
@@ -15,7 +15,7 @@ export default function HomePage() {
           <div className="order-2 flex flex-col items-center lg:order-1 lg:items-start">
             <HeroSection className="lg:text-left [&_h1]:lg:text-left" />
           </div>
-          <div className="order-1 flex justify-center lg:order-2 lg:justify-end lg:pr-4">
+          <div className="order-1 flex justify-center overflow-visible px-2 sm:px-4 lg:order-2 lg:justify-end lg:pr-4">
             <HeroPhoneMockup />
           </div>
         </div>

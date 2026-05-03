@@ -39,20 +39,43 @@ app.use(express.json());
 // Firebase optional: if config missing or invalid, chat still works without profile/history
 let db = null;
 let admin = null;
-const configPath = path.join(__dirname, "config", "firebaseServiceKey.json");
-if (fs.existsSync(configPath)) {
+function resolveFirebaseConfigPath() {
+    const dir = path.join(__dirname, "config");
+    const candidates = [
+        path.join(dir, "firebase.json"),
+        path.join(dir, "firebaseServiceKey.json"),
+    ];
+    for (const p of candidates) {
+        if (fs.existsSync(p)) return p;
+    }
+    return null;
+}
+const configPath = resolveFirebaseConfigPath();
+if (configPath) {
     try {
         admin = require("firebase-admin");
-        const serviceAccount = require(configPath);
+        const serviceAccount = JSON.parse(fs.readFileSync(configPath, "utf8"));
         admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
         db = admin.firestore();
         console.log("Firebase connected: profile and chat history enabled.");
+        console.log("  (using", path.basename(configPath) + ")");
     } catch (err) {
         console.warn("Firebase config invalid or key unreadable:", err.message);
+        const hint =
+            /private key|ASN|Too few bytes|DECODER/i.test(String(err.message));
+        if (hint) {
+            console.warn(
+                "  → Your Firebase JSON is likely corrupted (e.g. copy-paste broke PEM line breaks). " +
+                    "In Firebase Console: Project settings → Service accounts → Generate new private key. " +
+                    "Save as config/firebase.json or config/firebaseServiceKey.json without editing private_key."
+            );
+        }
         console.warn("Running without Firebase: chat works, no profile/history.");
     }
 } else {
-    console.warn("No config/firebaseServiceKey.json found. Running without Firebase.");
+    console.warn(
+        "No Firebase credentials found. Add config/firebase.json or config/firebaseServiceKey.json (service account JSON)."
+    );
 }
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;

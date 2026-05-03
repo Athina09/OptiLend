@@ -1,5 +1,8 @@
+import { PhoneSideComplianceOrbs } from '@/components/landing/ComplianceMiniOrbs';
+
 /**
  * Minimal realistic phone mockup (CSS only — no Three.js on the hero).
+ * Small compliance orbs (UPI, GST, RBI, …) sit on both sides — no large accent circle.
  */
 export function HeroPhoneMockup() {
   return (
@@ -7,8 +10,7 @@ export function HeroPhoneMockup() {
       className="relative mx-auto w-full max-w-[320px] select-none lg:max-w-none"
       aria-hidden
     >
-      {/* Soft accent orb — matches reference minimal scene */}
-      <div className="pointer-events-none absolute -left-4 top-1/4 h-24 w-24 rounded-full bg-white shadow-[0_8px_40px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/80 lg:-left-8 lg:h-28 lg:w-28" />
+      <PhoneSideComplianceOrbs />
 
       <div className="relative flex flex-col items-center pt-8">
         {/* Pedestal */}
